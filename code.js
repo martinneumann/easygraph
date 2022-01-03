@@ -71,7 +71,7 @@ const options = {
 };
 
 const config = {
-	type: 'line',
+	type: 'bar',
 	data: data,
 	options: options
 	
