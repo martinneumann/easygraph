@@ -17,11 +17,26 @@
 					<input type="radio" name="type" id="pie" value="pie">
 					<label for="pie">Pie</label>
 				</form>
+				<form name="stacked">
+					<input type="radio" name="stacked" id="unstacked" value="unstacked" checked>
+					<label for="unstacked">Unstacked</label>
+					<input type="radio" name="stacked" id="stacked" value="stacked">
+					<label for="stacked">Stacked</label>
+				</form>
 				<form name="colors">
 					<input type="radio" name="color" id="red" value="red" checked>
 					<label for="red">Red</label>
 					<input type="radio" name="color" id="green" value="green">
 					<label for="green">Green</label>
+				</form>
+				<form name="addData" class="mt-3">
+					<button type="button" class="btn btn-danger" onclick="resetGraph()" id="delete">Delete all</button>
+
+					<input type="number" name="datax" id="dataFieldX" placeholder="Add X data here">
+					<input type="number" name="datay" id="dataFieldY" placeholder="Add Y data here">
+					<input type="button" value="Add Data" onclick="addDataToDataset()">
+				</form>
+				<form name="data" id="dataList">
 				</form>
 			</div>
 			<div class="col col-md-8">
