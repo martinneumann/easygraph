@@ -29,6 +29,11 @@
 					<input type="radio" name="color" id="green" value="green">
 					<label for="green">Green</label>
 				</form>
+				<label for="dataSets">Dataset:</label>
+				<select name="dataSets" id="dataSets" onchange="changeSelectedDataset();">
+				</select>
+				<button type="button" class="btn btn-primary" onclick="addDataSet()" id="addDataSet">Add
+					dataset</button>
 				<form name="addData" class="mt-3">
 					<button type="button" class="btn btn-danger" onclick="resetGraph()" id="delete">Delete all</button>
 

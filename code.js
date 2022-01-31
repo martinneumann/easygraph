@@ -44,11 +44,14 @@ for (var choicePie of radPie) {
 }
 
 // Render data list to form input
-function renderData() {
+function renderData(dataSetNum) {
+	if (dataSetNum == null) {
+		dataSetNum = 0;
+	}
 	var dataList = document.getElementById("dataList");
 	var data = chart.data;
 	var dataStr = "";
-	for (var i = 0; i < data.datasets[0].data.length; i++) {
+	for (var i = 0; i < data.datasets[dataSetNum].data.length; i++) {
 		// Add a number input for each value and a minus button next to it for removal
 		dataList.innerHTML += "<div class='data-item'><input type='number' onchange=updateData() value='" + data.datasets[0].data[i] + "'><button class='btn btn-danger' onclick='removeData(" + i + ")'>-</button></div>";
 	}
@@ -92,6 +95,33 @@ function resetGraph() {
 	dataList.innerHTML = "";
 	renderData();
 	update();
+}
+
+function updateSelectDatasetsMenu() {
+	var select = document.getElementById("dataSets");
+	// Add an innerHtml option for each dataset
+	for (var i = 0; i < chart.data.datasets.length; i++) {
+		select.innerHTML += "<option value='" + i + "'>" + chart.data.datasets[i].label + "</option>";
+	}
+}
+
+function addDataSet() {
+	var dataSets = chart.data.datasets;
+	var newDataSet = {
+		label: "",
+		backgroundColor: "",
+		borderColor: "",
+		data: []
+	};
+	dataSets.push(newDataSet);
+	updateSelectDatasetsMenu();
+	update();
+}
+
+function changeSelectedDataset() {
+	var select = document.getElementById("dataSets");
+	var selected = select.options[select.selectedIndex].value;
+	renderData(selected);
 }
 
 
@@ -161,6 +191,7 @@ function init() {
 		config
 	);
 
+	updateSelectDatasetsMenu();
 	renderData();
 }
 
