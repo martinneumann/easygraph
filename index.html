@@ -9,6 +9,7 @@
 	<div class="container justify-content-center">
 		<div class="row align-items-center">
 			<div class="col col-md-2">
+				<input type="text" oninput="changeTitle()" id="title" placeholder="Change title">
 				<form name="types">
 					<input type="radio" name="type" id="bar" value="bar" checked>
 					<label for="bar">Bar</label>
@@ -29,7 +30,10 @@
 					<input type="radio" name="color" id="green" value="green">
 					<label for="green">Green</label>
 				</form>
+				<label for="hideLegend">Hide legend</label>
+				<input type="checkbox" oninput="toggleLegend()" id="showLegend" name="hideLegend">
 				<label for="dataSets">Dataset:</label>
+				<input type="text" id="dataSetLabel">
 				<select name="dataSets" id="dataSets" onchange="changeSelectedDataset();">
 				</select>
 				<button type="button" class="btn btn-primary" onclick="addDataSet()" id="addDataSet">Add

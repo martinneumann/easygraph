@@ -74,7 +74,7 @@ function addDataToDataset() {
 	var dataToAdd = document.getElementById("dataFieldX").value;
 	data.datasets[0].data.push(parseInt(dataToAdd));
 	dataToAdd = document.getElementById("dataFieldY").value;
-	labels.push(dataToAdd);
+	data.labels.push(dataToAdd);
 	dataList.innerHTML = "";
 	renderData();
 	update();
@@ -90,8 +90,10 @@ function updateData() {
 // Update chart
 function resetGraph() {
 	var dataList = document.getElementById("dataList");
-	data.datasets[0].data = [];
-	labels = [];
+	data.datasets.forEach((dataset) => {
+		dataset.data = [];
+	});
+	data.labels = [];
 	dataList.innerHTML = "";
 	renderData();
 	update();
@@ -107,8 +109,9 @@ function updateSelectDatasetsMenu() {
 
 function addDataSet() {
 	var dataSets = chart.data.datasets;
+	var label = document.getElementById("dataSetLabel").value;
 	var newDataSet = {
-		label: "",
+		label: label,
 		backgroundColor: "",
 		borderColor: "",
 		data: []
@@ -122,6 +125,18 @@ function changeSelectedDataset() {
 	var select = document.getElementById("dataSets");
 	var selected = select.options[select.selectedIndex].value;
 	renderData(selected);
+}
+
+function changeTitle() {
+	var title = document.getElementById("title").value;
+	options.plugins.title.text = title;
+	update();
+}
+
+function toggleLegend() {
+	options.plugins.legend.display = !options.plugins.legend.display;
+	console.log("Toggle")
+	update();
 }
 
 
@@ -138,7 +153,7 @@ let labels = [
 let data = {
 	labels: labels,
 	datasets: [{
-		label: 'My First dataset',
+		label: 'Data Set',
 		backgroundColor: 'rgb(255, 99, 132)',
 		borderColor: 'rgb(255, 99, 132)',
 		data: [0, 10, 5, 2, 20, 30, 45],
@@ -147,9 +162,19 @@ let data = {
 
 const options = {
 	responsive: true,
-	title: {
-		display: true,
-		text: 'Chart.js Line Chart'
+	plugins: {
+		title: {
+
+			display: true,
+			text: 'Chart'
+		},
+		legend: {
+			display: true,
+			position: 'top',
+			labels: {
+				fontColor: 'rgb(255, 99, 132)'
+			}
+		},
 	},
 	tooltips: {
 		mode: 'index',
